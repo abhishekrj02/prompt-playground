@@ -7,7 +7,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs,TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { usePromptStore } from "@/store/promptStore";
 import { format } from "date-fns";
 
@@ -30,6 +30,8 @@ export default function Compare() {
     };
 
     const handleReset = () => {
+        setVersionAId("");
+        setVersionBId("");
         setIsComparing(false);
     };
 
@@ -117,12 +119,20 @@ export default function Compare() {
                 </div>
 
                 <Button
-                    onClick={isComparing ? handleReset : handleCompare}
+                    onClick={handleCompare}
                     disabled={!versionAId || !versionBId}
                     className="gap-2"
                 >
                     <GitCompare className="h-3.5 w-3.5" />
-                    {isComparing ? "Reset" : "Compare"}
+                    Compare
+                </Button>
+
+                <Button
+                    variant="destructive"
+                    onClick={handleReset}
+                    disabled={!versionAId && !versionBId && !isComparing}
+                >
+                    Reset
                 </Button>
             </div>
 
@@ -141,9 +151,10 @@ export default function Compare() {
                                 Output Comparison
                             </TabsTrigger>
                         </TabsList>
-
-
                     </Tabs>
+
+
+                    {/* left part of diffview will go here*/}
 
                     {/* Metadata Comparison Table */}
                     <div className="mt-8">
