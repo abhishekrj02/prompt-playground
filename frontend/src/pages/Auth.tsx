@@ -131,7 +131,7 @@ export default function Auth() {
                                             value={signInPassword}
                                             onChange={(e) =>
                                                 setSignInPassword(
-                                                    e.target.value
+                                                    e.target.value,
                                                 )
                                             }
                                             required
@@ -220,7 +220,7 @@ export default function Auth() {
                                             value={signUpPassword}
                                             onChange={(e) =>
                                                 setSignUpPassword(
-                                                    e.target.value
+                                                    e.target.value,
                                                 )
                                             }
                                             required
@@ -242,7 +242,7 @@ export default function Auth() {
                                             value={signUpConfirmPassword}
                                             onChange={(e) =>
                                                 setSignUpConfirmPassword(
-                                                    e.target.value
+                                                    e.target.value,
                                                 )
                                             }
                                             required
@@ -268,6 +268,11 @@ export default function Auth() {
                                 </form>
                             </TabsContent>
                         </Tabs>
+                    </div>
+                    <div className="flex justify-center mt-4 animate-caret-blink">
+                        <span className="text-md italic text-red-600 font-medium">
+                            This project is under development.
+                        </span>
                     </div>
                 </div>
             </div>
