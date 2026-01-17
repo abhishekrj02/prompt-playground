@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Terminal, LogOut, User, LucideArrowUpRight, Github } from "lucide-react";
+import { Terminal, LogOut, User, Github, History } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/authStore";
 
@@ -15,14 +15,17 @@ export function Navbar() {
     return (
         <nav className="h-12 border-b border-border flex items-center px-4 justify-between">
             <div className="flex items-center gap-6">
-                <div className="flex items-center gap-2 text-foreground font-medium">
-                    <Terminal className="h-4 w-4" />
-                    <span>Prompt Playground</span>
-                </div>
+                <NavLink to={"/"}>
+                    <div className="flex items-center gap-2 text-foreground font-medium">
+                        <Terminal className="h-4 w-4" />
+                        <span>Prompt Playground</span>
+                    </div>
+                </NavLink>
 
                 <div className="flex items-center gap-1">
                     <NavLink
                         to="/dashboard"
+                        end
                         className={({ isActive }) =>
                             `px-3 py-1.5 text-sm rounded-md transition-colors ${
                                 isActive
@@ -45,12 +48,23 @@ export function Navbar() {
                     >
                         Compare
                     </NavLink>
-                    
+                    <NavLink
+                        to="/dashboard/versions"
+                        className={({ isActive }) =>
+                            `px-3 py-1.5 text-sm rounded-md transition-colors flex items-center gap-1.5 ${
+                                isActive
+                                    ? "bg-secondary text-foreground"
+                                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                            }`
+                        }
+                    >
+                        Versions
+                    </NavLink>
                 </div>
             </div>
 
             <div className="flex items-center gap-3">
-                <Button asChild >
+                <Button asChild>
                     <a
                         href="https://github.com/abhishekrj02/prompt-playground"
                         target="_blank"

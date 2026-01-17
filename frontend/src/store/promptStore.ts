@@ -14,6 +14,9 @@ interface PromptState {
     setOutput: (output: string, metadata: ExecutionMetadata) => void;
     saveVersion: (note?: string) => void;
     loadVersion: (id: string) => PromptVersion | undefined;
+    deleteVersion: (id: string) => void;
+    deleteMultipleVersions: (ids: string[]) => void;
+    updateVersionNote: (id: string, note: string) => void;
     setIsRunning: (isRunning: boolean) => void;
     reset: () => void;
 }
@@ -71,6 +74,26 @@ export const usePromptStore = create<PromptState>()(
             loadVersion: (id) => {
                 const state = get();
                 return state.versions.find((v) => v.id === id);
+            },
+
+            deleteVersion: (id) => {
+                set((state) => ({
+                    versions: state.versions.filter((v) => v.id !== id),
+                }));
+            },
+
+            deleteMultipleVersions: (ids) => {
+                set((state) => ({
+                    versions: state.versions.filter((v) => !ids.includes(v.id)),
+                }));
+            },
+
+            updateVersionNote: (id, note) => {
+                set((state) => ({
+                    versions: state.versions.map((v) =>
+                        v.id === id ? { ...v, note } : v
+                    ),
+                }));
             },
 
             setIsRunning: (isRunning) => set({ isRunning }),
